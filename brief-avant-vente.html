@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Brief avant-vente Primo — Template à remplir par l'AE avant d'impliquer un Solution Engineer" />
+  <title>Brief avant-vente · Primo SE</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css" />
+  <style>
+    :root {
+      --blue:        #2563eb;
+      --blue-light:  #dbeafe;
+      --blue-mid:    #93c5fd;
+      --blue-dark:   #1e40af;
+      --green:       #16a34a;
+      --green-light: #dcfce7;
+      --orange:      #ea580c;
+      --orange-light:#ffedd5;
+      --red:         #dc2626;
+      --red-light:   #fee2e2;
+      --text-1:      #0f172a;
+      --text-2:      #475569;
+      --text-3:      #94a3b8;
+      --bg:          #ffffff;
+      --bg-2:        #f8fafc;
+      --bg-3:        #f1f5f9;
+      --border:      #e2e8f0;
+      --border-2:    #cbd5e1;
+      --radius-sm:   6px;
+      --radius-md:   10px;
+      --radius-lg:   14px;
+      --shadow-sm:   0 1px 3px rgba(0,0,0,.06), 0 1px 2px rgba(0,0,0,.04);
+      --shadow-md:   0 4px 12px rgba(0,0,0,.08), 0 2px 4px rgba(0,0,0,.04);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+      font-size: 14px;
+      color: var(--text-1);
+      background: var(--bg-2);
+      min-height: 100vh;
+      padding: 0;
+    }
+
+    /* ── Header ── */
+    .header {
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .header-left { display: flex; align-items: center; gap: 12px; }
+    .logo {
+      width: 28px; height: 28px;
+      background: var(--blue);
+      border-radius: 7px;
+      display: flex; align-items: center; justify-content: center;
+      color: #fff; font-size: 16px;
+    }
+    .header-title { font-size: 15px; font-weight: 600; color: var(--text-1); }
+    .header-sub   { font-size: 12px; color: var(--text-3); margin-top: 1px; }
+    .header-badge {
+      font-size: 11px; font-weight: 500;
+      padding: 3px 10px;
+      border-radius: 99px;
+      background: var(--blue-light);
+      color: var(--blue-dark);
+      border: 1px solid var(--blue-mid);
+    }
+
+    /* ── Progress bar ── */
+    .progress-wrap {
+      background: var(--bg);
+      padding: 10px 24px 12px;
+      border-bottom: 1px solid var(--border);
+    }
+    .progress-meta {
+      display: flex; justify-content: space-between;
+      font-size: 12px; color: var(--text-3);
+      margin-bottom: 6px;
+    }
+    .progress-meta span:last-child { font-weight: 500; color: var(--text-2); }
+    .progress-track {
+      height: 4px; background: var(--bg-3);
+      border-radius: 99px; overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%; background: var(--blue);
+      border-radius: 99px;
+      transition: width 0.35s ease;
+      width: 0%;
+    }
+
+    /* ── Layout ── */
+    .container {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 24px 16px 80px;
+    }
+
+    /* ── Section card ── */
+    .card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 20px 22px;
+      margin-bottom: 16px;
+      box-shadow: var(--shadow-sm);
+    }
+    .card-label {
+      font-size: 10.5px;
+      font-weight: 600;
+      letter-spacing: .09em;
+      text-transform: uppercase;
+      color: var(--text-3);
+      margin-bottom: 14px;
+      display: flex; align-items: center; gap: 7px;
+    }
+    .card-label i { font-size: 14px; color: var(--blue); }
+
+    /* ── Property rows ── */
+    .prop { display: grid; grid-template-columns: 180px 1fr; align-items: start; gap: 8px; padding: 8px 0; border-bottom: 1px solid var(--bg-3); }
+    .prop:last-child { border-bottom: none; padding-bottom: 0; }
+    .prop-key {
+      font-size: 13px; color: var(--text-2);
+      display: flex; align-items: center; gap: 6px;
+      padding-top: 6px;
+    }
+    .prop-key i { font-size: 15px; color: var(--text-3); flex-shrink: 0; }
+    .prop-val { font-size: 13px; }
+
+    /* ── Inputs ── */
+    input[type="text"], input[type="date"], input[type="email"],
+    select, textarea {
+      width: 100%;
+      font-family: inherit;
+      font-size: 13px;
+      color: var(--text-1);
+      background: transparent;
+      border: 1px solid transparent;
+      border-radius: var(--radius-sm);
+      padding: 5px 8px;
+      outline: none;
+      resize: none;
+      transition: background .15s, border-color .15s;
+    }
+    input[type="text"]:focus, input[type="date"]:focus, input[type="email"]:focus,
+    select:focus, textarea:focus {
+      background: var(--bg-2);
+      border-color: var(--border-2);
+    }
+    input::placeholder, textarea::placeholder { color: var(--text-3); }
+    select { cursor: pointer; color: var(--text-1); }
+    select option[value=""] { color: var(--text-3); }
+
+    /* ── Pills ── */
+    .pill-row { display: flex; flex-wrap: wrap; gap: 6px; padding: 4px 0; }
+    .pill {
+      display: inline-flex; align-items: center; gap: 4px;
+      font-size: 12px; padding: 4px 11px;
+      border-radius: 99px;
+      border: 1px solid var(--border-2);
+      cursor: pointer; user-select: none;
+      color: var(--text-2);
+      background: var(--bg);
+      transition: all .15s;
+    }
+    .pill:hover { background: var(--bg-2); border-color: var(--blue-mid); }
+    .pill.active { background: var(--blue-light); border-color: var(--blue); color: var(--blue-dark); font-weight: 500; }
+    .pill i { font-size: 13px; }
+
+    /* ── Urgency buttons ── */
+    .urg-row { display: flex; flex-wrap: wrap; gap: 8px; padding: 4px 0; }
+    .urg {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 12.5px; padding: 6px 14px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border-2);
+      cursor: pointer; user-select: none;
+      color: var(--text-2); background: var(--bg);
+      transition: all .15s; font-weight: 400;
+    }
+    .urg:hover { background: var(--bg-2); }
+    .urg.active.rouge  { background: var(--red-light);    border-color: var(--red);    color: #991b1b; font-weight: 500; }
+    .urg.active.orange { background: var(--orange-light); border-color: var(--orange); color: #9a3412; font-weight: 500; }
+    .urg.active.vert   { background: var(--green-light);  border-color: var(--green);  color: #166534; font-weight: 500; }
+
+    /* ── Block sections (free text) ── */
+    .block { margin-bottom: 14px; }
+    .block:last-child { margin-bottom: 0; }
+    .block-title {
+      font-size: 12.5px; font-weight: 500;
+      color: var(--text-2); margin-bottom: 6px;
+      display: flex; align-items: center; gap: 6px;
+    }
+    .block-title i { font-size: 15px; color: var(--text-3); }
+    .text-area {
+      width: 100%; font-family: inherit; font-size: 13px;
+      color: var(--text-1); line-height: 1.7;
+      background: var(--bg-2); border: 1px solid var(--border);
+      border-radius: var(--radius-sm); padding: 8px 10px;
+      resize: none; outline: none;
+      transition: border-color .15s;
+    }
+    .text-area:focus { border-color: var(--blue); }
+
+    /* ── Questions bloquantes ── */
+    .q-list { display: flex; flex-direction: column; gap: 6px; }
+    .q-item {
+      display: flex; align-items: flex-start; gap: 8px;
+      padding: 6px 0;
+      border-bottom: 1px solid var(--bg-3);
+    }
+    .q-item:last-child { border-bottom: none; }
+    .q-num {
+      font-size: 12px; color: var(--text-3);
+      padding-top: 8px; min-width: 20px;
+      font-weight: 500;
+    }
+    .q-input {
+      flex: 1; font-family: inherit; font-size: 13px;
+      color: var(--text-1); line-height: 1.6;
+      background: var(--bg-2); border: 1px solid var(--border);
+      border-radius: var(--radius-sm); padding: 6px 10px;
+      resize: none; outline: none; transition: border-color .15s;
+    }
+    .q-input:focus { border-color: var(--blue); }
+    .q-del {
+      font-size: 16px; color: var(--text-3);
+      cursor: pointer; padding-top: 8px;
+      transition: color .15s; background: none; border: none;
+    }
+    .q-del:hover { color: var(--red); }
+
+    .add-btn {
+      display: inline-flex; align-items: center; gap: 5px;
+      font-size: 12px; color: var(--text-3);
+      background: none; border: 1px dashed var(--border-2);
+      border-radius: var(--radius-sm);
+      padding: 6px 12px; cursor: pointer; margin-top: 8px;
+      transition: all .15s;
+    }
+    .add-btn:hover { color: var(--blue); border-color: var(--blue); background: var(--blue-light); }
+
+    /* ── Divider ── */
+    .divider { border: none; border-top: 1px solid var(--bg-3); margin: 14px 0; }
+
+    /* ── Required asterisk ── */
+    .req { color: var(--red); margin-left: 2px; }
+
+    /* ── Footer / Actions ── */
+    .footer {
+      position: fixed; bottom: 0; left: 0; right: 0;
+      background: var(--bg);
+      border-top: 1px solid var(--border);
+      padding: 12px 24px;
+      display: flex; align-items: center; justify-content: space-between;
+      box-shadow: 0 -4px 16px rgba(0,0,0,.06);
+      z-index: 100;
+    }
+    .footer-hint { font-size: 12px; color: var(--text-3); display: flex; align-items: center; gap: 6px; }
+    .footer-hint i { font-size: 15px; color: var(--orange); }
+    .footer-actions { display: flex; gap: 8px; }
+
+    .btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 13px; font-weight: 500; font-family: inherit;
+      padding: 8px 16px; border-radius: var(--radius-md);
+      cursor: pointer; border: 1px solid var(--border-2);
+      transition: all .15s;
+    }
+    .btn-ghost { background: var(--bg); color: var(--text-2); }
+    .btn-ghost:hover { background: var(--bg-2); }
+    .btn-primary { background: var(--blue); color: #fff; border-color: var(--blue); }
+    .btn-primary:hover { background: var(--blue-dark); border-color: var(--blue-dark); }
+    .btn i { font-size: 15px; }
+
+    /* ── Toast notification ── */
+    .toast {
+      position: fixed; bottom: 80px; left: 50%; transform: translateX(-50%) translateY(20px);
+      background: var(--text-1); color: #fff;
+      font-size: 13px; font-weight: 500;
+      padding: 10px 20px; border-radius: var(--radius-md);
+      display: flex; align-items: center; gap: 8px;
+      opacity: 0; pointer-events: none;
+      transition: opacity .25s, transform .25s;
+      z-index: 200; white-space: nowrap;
+    }
+    .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+    .toast.success { background: var(--green); }
+    .toast.error   { background: var(--red); }
+
+    /* ── Modal overlay ── */
+    .modal-overlay {
+      position: fixed; inset: 0; background: rgba(15,23,42,.45);
+      display: none; align-items: center; justify-content: center;
+      z-index: 300; padding: 16px;
+    }
+    .modal-overlay.open { display: flex; }
+    .modal {
+      background: var(--bg); border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-md);
+      width: 100%; max-width: 620px; max-height: 80vh;
+      display: flex; flex-direction: column;
+      animation: fadeUp .2s ease;
+    }
+    @keyframes fadeUp { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:translateY(0); } }
+    .modal-header {
+      padding: 18px 22px 14px;
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .modal-title { font-size: 15px; font-weight: 600; display: flex; align-items: center; gap: 8px; }
+    .modal-title i { font-size: 18px; color: var(--blue); }
+    .modal-close {
+      font-size: 20px; color: var(--text-3); cursor: pointer;
+      background: none; border: none; line-height: 1;
+      transition: color .15s;
+    }
+    .modal-close:hover { color: var(--text-1); }
+    .modal-body { padding: 16px 22px; overflow-y: auto; flex: 1; }
+    .modal-output {
+      font-family: "SF Mono", ui-monospace, Menlo, monospace;
+      font-size: 12px; line-height: 1.7;
+      color: var(--text-2); white-space: pre-wrap;
+      background: var(--bg-2); border: 1px solid var(--border);
+      border-radius: var(--radius-sm); padding: 14px;
+      max-height: 360px; overflow-y: auto;
+    }
+    .modal-footer {
+      padding: 14px 22px; border-top: 1px solid var(--border);
+      display: flex; gap: 8px; justify-content: flex-end;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 600px) {
+      .prop { grid-template-columns: 1fr; }
+      .prop-key { padding-top: 0; }
+      .header-badge { display: none; }
+      .footer { padding: 10px 14px; }
+      .footer-hint { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Header -->
+<header class="header">
+  <div class="header-left">
+    <div class="logo"><i class="ti ti-clipboard-list"></i></div>
+    <div>
+      <div class="header-title">Brief avant-vente — Demande SE</div>
+      <div class="header-sub">À remplir par l'AE avant d'impliquer un Solution Engineer</div>
+    </div>
+  </div>
+  <span class="header-badge">Primo · Internal</span>
+</header>
+
+<!-- Progress -->
+<div class="progress-wrap">
+  <div class="progress-meta">
+    <span>Progression du brief</span>
+    <span id="pct-label">0% complété</span>
+  </div>
+  <div class="progress-track">
+    <div class="progress-fill" id="progress-fill"></div>
+  </div>
+</div>
+
+<!-- Main -->
+<main class="container">
+
+  <!-- ① Informations prospect -->
+  <div class="card">
+    <div class="card-label"><i class="ti ti-building"></i>Informations prospect</div>
+
+    <div class="prop">
+      <div class="prop-key"><i class="ti ti-building-skyscraper"></i>Entreprise <span class="req">*</span></div>
+      <div class="prop-val"><input type="text" id="f-company" placeholder="Nom de la société" oninput="tick()"></div>
+    </div>
+    <div class="prop">
+      <div class="prop-key"><i class="ti ti-user"></i>Interlocuteur(s) <span class="req">*</span></div>
+      <div class="prop-val"><input type="text" id="f-contact" placeholder="Prénom Nom — Titre (ex: Marie Dupont — DSI)" oninput="tick()"></div>
+    </div>
+    <div class="prop">
+      <div class="prop-key"><i class="ti ti-mail"></i>Email(s)</div>
+      <div class="prop-val"><input type="email" id="f-email" placeholder="contact@entreprise.com"></div>
+    </div>
+    <div class="prop">
+      <div class="prop-key"><i class="ti ti-users"></i>Taille entreprise <span class="req">*</span></div>
+      <div class="prop-val">
+        <select id="f-size" onchange="tick()">
+          <option value="">— Sélectionner</option>
+          <option value="1-50">1 – 50 collaborateurs</option>
+          <option value="50-200">50 – 200 collaborateurs</option>
+          <option value="200-500">200 – 500 collaborateurs</option>
+          <option value="500-1000">500 – 1 000 collaborateurs</option>
+          <option value="1000+">1 000+ collaborateurs</option>
+        </select>
+      </div>
+    </div>
+    <div class="prop">
+      <div class="prop-key"><i class="ti ti-device-laptop"></i>Parc d'appareils <span class="req">*</span></div>
+      <div class="prop-val"><input type="text" id="f-devices" placeholder="ex: 300 Mac, 80 PC Windows, 20 iPhone" oninput="tick()"></div>
+    </div>
+    <div class="prop">
+      <div class="prop-key"><i class="ti ti-stack-2"></i>OS ciblés</div>
+      <div class="prop-val">
+        <div class="pill-row" id="os-pills">
+          <span class="pill" onclick="togglePill(this)"><i class="ti ti-brand-apple"></i>macOS</span>
+          <span class="pill" onclick="togglePill(this)"><i class="ti ti-brand-windows"></i>Windows</span>
+          <span class="pill" onclick="togglePill(this)"><i class="ti ti-brand-ubuntu"></i>Linux</span>
+          <span class="pill" onclick="togglePill(this)"><i class="ti ti-device-mobile"></i>iOS</span>
+          <span class="pill" onclick="togglePill(this)"><i class="ti ti-brand-android"></i>Android</span>
+        </div>
+      </div>
+    </div>
+    <div class="prop">
+      <div class="prop-key"><i class="ti ti-calendar"></i>Date du call <span class="req">*</span></div>
+      <div class="prop-val"><input type="date" id="f-date" oninput="tick()"></div>
+    </div>
+    <div class="prop">
+      <div class="prop-key"><i class="ti ti-user-circle"></i>AE responsable <span class="req">*</span></div>
+      <div class="prop-val"><input type="text" id="f-ae" placeholder="Ton prénom + nom" oninput="tick()"></div>
+    </div>
+    <div class="prop">
+      <div class="prop-key"><i class="ti ti-map-pin"></i>Secteur d'activité</div>
+      <div class="prop-val">
+        <select id="f-sector">
+          <option value="">— Sélectionner</option>
+          <option>Tech / SaaS</option>
+          <option>Finance / Fintech</option>
+          <option>Santé / Medtech</option>
+          <option>E-commerce / Retail</option>
+          <option>Industrie / Manufacturing</option>
+          <option>Conseil / Services</option>
+          <option>Éducation</option>
+          <option>Autre</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- ② Stack technique actuelle -->
+  <div class="card">
+    <div class="card-label"><i class="ti ti-server"></i>Stack technique actuelle</div>
+
+    <div class="prop">
+      <div class="prop-key"><i class="ti ti-replace"></i>MDM actuel</div>
+      <div class="prop-val">
+        <div class="pill-row" id="mdm-pills">
+          <span class="pill" onclick="togglePill(this)">Jamf Pro</span>
+          <span class="pill" onclick="togglePill(this)">Jamf Now</span>
+          <span class="pill" onclick="togglePill(this)">Kandji</span>
+          <span class="pill" onclick="togglePill(this)">Mosyle</span>
+          <span class="pill" onclick="togglePill(this)">Intune</span>
+          <span class="pill" onclick="togglePill(this)">Hexnode</span>
+          <span class="pill" onclick="togglePill(this)">Addigy</span>
+          <span class="pill" onclick="togglePill(this)">Scalefusion</span>
+          <span class="pill" onclick="togglePill(this)">Aucune solution</span>
+          <span class="pill" onclick="togglePill(this)">Autre</span>
+        </div>
+      </div>
+    </div>
+    <div class="prop">
+      <div class="prop-key"><i class="ti ti-users-group"></i>SIRH</div>
+      <div class="prop-val">
+        <div class="pill-row" id="sirh-pills">
+          <span class="pill" onclick="togglePill(this)">BambooHR</span>
+          <span class="pill" onclick="togglePill(this)">Personio</span>
+          <span class="pill" onclick="togglePill(this)">Lucca</span>
+          <span class="pill" onclick="togglePill(this)">Workday</span>
+          <span class="pill" onclick="togglePill(this)">HiBob</span>
+          <span class="pill" onclick="togglePill(this)">Factorial</span>
+          <span class="pill" onclick="togglePill(this)">Payfit</span>
+          <span class="pill" onclick="togglePill(this)">ADP</span>
+          <span class="pill" onclick="togglePill(this)">Rippling</span>
+          <span class="pill" onclick="togglePill(this)">Aucun</span>
+          <span class="pill" onclick="togglePill(this)">Autre</span>
+        </div>
+      </div>
+    </div>
+    <div class="prop">
+      <div class="prop-key"><i class="ti ti-key"></i>SSO / IAM</div>
+      <div class="prop-val">
+        <div class="pill-row" id="sso-pills">
+          <span class="pill" onclick="togglePill(this)">Okta</span>
+          <span class="pill" onclick="togglePill(this)">Microsoft Entra ID</span>
+          <span class="pill" onclick="togglePill(this)">Google Workspace</span>
+          <span class="pill" onclick="togglePill(this)">JumpCloud</span>
+          <span class="pill" onclick="togglePill(this)">OneLogin</span>
+          <span class="pill" onclick="togglePill(this)">Aucun</span>
+          <span class="pill" onclick="togglePill(this)">Autre</span>
+        </div>
+      </div>
+    </div>
+    <div class="prop">
+      <div class="prop-key"><i class="ti ti-layout-grid"></i>Suite bureautique</div>
+      <div class="prop-val">
+        <div class="pill-row" id="suite-pills">
+          <span class="pill" onclick="togglePill(this)"><i class="ti ti-brand-google"></i>Google Workspace</span>
+          <span class="pill" onclick="togglePill(this)"><i class="ti ti-brand-microsoft"></i>Microsoft 365</span>
+          <span class="pill" onclick="togglePill(this)">Autre</span>
+        </div>
+      </div>
+    </div>
+    <div class="prop">
+      <div class="prop-key"><i class="ti ti-ticket"></i>Ticketing IT</div>
+      <div class="prop-val"><input type="text" id="f-ticketing" placeholder="ex: Jira, Zendesk, Linear, Freshservice..."></div>
+    </div>
+  </div>
+
+  <!-- ③ Contexte & enjeu -->
+  <div class="card">
+    <div class="card-label"><i class="ti ti-target"></i>Contexte & enjeu</div>
+
+    <div class="block">
+      <div class="block-title"><i class="ti ti-alert-triangle"></i>Problème principal exprimé <span class="req">*</span></div>
+      <textarea class="text-area" id="f-problem" rows="3"
+        placeholder="Décrire en 2-4 phrases le déclencheur de l'opportunité. Qu'est-ce qui les a poussés à chercher une solution maintenant ? Quel est l'événement déclencheur ?"
+        oninput="autoResize(this);tick()"></textarea>
+    </div>
+
+    <hr class="divider">
+
+    <div class="block">
+      <div class="block-title"><i class="ti ti-clock"></i>Urgence & timeline prospect <span class="req">*</span></div>
+      <div class="urg-row" id="urgency-row">
+        <span class="urg rouge" onclick="selectUrg(this,'rouge')"><i class="ti ti-flame"></i>Immédiate — &lt; 1 mois</span>
+        <span class="urg orange" onclick="selectUrg(this,'orange')"><i class="ti ti-clock"></i>Court terme — 1 à 3 mois</span>
+        <span class="urg vert" onclick="selectUrg(this,'vert')"><i class="ti ti-leaf"></i>Moyen terme — 3 à 6 mois</span>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <div class="block" style="margin-bottom:0">
+      <div class="block-title"><i class="ti ti-target-arrow"></i>Use cases prioritaires pour la démo</div>
+      <div class="pill-row" id="usecase-pills">
+        <span class="pill" onclick="togglePill(this)"><i class="ti ti-device-laptop"></i>Enrôlement Mac</span>
+        <span class="pill" onclick="togglePill(this)"><i class="ti ti-brand-windows"></i>Enrôlement Windows</span>
+        <span class="pill" onclick="togglePill(this)"><i class="ti ti-user-plus"></i>Onboarding automatique</span>
+        <span class="pill" onclick="togglePill(this)"><i class="ti ti-user-minus"></i>Offboarding automatique</span>
+        <span class="pill" onclick="togglePill(this)"><i class="ti ti-apps"></i>Gestion SaaS / accès</span>
+        <span class="pill" onclick="togglePill(this)"><i class="ti ti-shield-check"></i>Conformité / reporting</span>
+        <span class="pill" onclick="togglePill(this)"><i class="ti ti-shopping-cart"></i>Achat / inventaire</span>
+        <span class="pill" onclick="togglePill(this)"><i class="ti ti-robot"></i>Agent IA Uno</span>
+        <span class="pill" onclick="togglePill(this)"><i class="ti ti-plug"></i>Intégration SIRH spécifique</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ④ Processus décisionnel -->
+  <div class="card">
+    <div class="card-label"><i class="ti ti-hierarchy"></i>Processus décisionnel</div>
+
+    <div class="prop">
+      <div class="prop-key"><i class="ti ti-crown"></i>Décideur final</div>
+      <div class="prop-val"><input type="text" id="f-decision-maker" placeholder="ex: CTO, VP Finance, DRH..."></div>
+    </div>
+    <div class="prop">
+      <div class="prop-key"><i class="ti ti-star"></i>Champion interne</div>
+      <div class="prop-val"><input type="text" id="f-champion" placeholder="Qui porte le projet en interne ?"></div>
+    </div>
+    <div class="prop">
+      <div class="prop-key"><i class="ti ti-alert-circle"></i>Potentiel bloqueur</div>
+      <div class="prop-val"><input type="text" id="f-blocker" placeholder="ex: RSSI sceptique, IT conservateur..."></div>
+    </div>
+    <div class="prop">
+      <div class="prop-key"><i class="ti ti-coin"></i>Budget évoqué</div>
+      <div class="prop-val"><input type="text" id="f-budget" placeholder="ex: ~8K€/an, enveloppe IT globale, non communiqué"></div>
+    </div>
+    <div class="prop">
+      <div class="prop-key"><i class="ti ti-calendar-event"></i>Timeline décision</div>
+      <div class="prop-val"><input type="text" id="f-timeline" placeholder="ex: Décision avant fin Q3, contrat Jamf expire en sept."></div>
+    </div>
+    <div class="prop">
+      <div class="prop-key"><i class="ti ti-chart-bar"></i>Priorité deal</div>
+      <div class="prop-val">
+        <select id="f-priority" onchange="tick()">
+          <option value="">— Sélectionner</option>
+          <option value="high">🔴 Haute — deal stratégique</option>
+          <option value="med">🟠 Moyenne — à qualifier</option>
+          <option value="low">🟢 Basse — exploration</option>
+        </select>
+      </div>
+    </div>
+    <div class="prop">
+      <div class="prop-key"><i class="ti ti-search"></i>Autres solutions évaluées</div>
+      <div class="prop-val"><input type="text" id="f-competitors-eval" placeholder="ex: Kandji, Rippling IT — ont fait une démo il y a 2 semaines"></div>
+    </div>
+  </div>
+
+  <!-- ⑤ Questions bloquantes pour le SE -->
+  <div class="card">
+    <div class="card-label"><i class="ti ti-help-circle"></i>Points bloquants — Pourquoi tu as besoin du SE <span class="req">*</span></div>
+
+    <div class="q-list" id="q-list">
+      <div class="q-item">
+        <span class="q-num">1.</span>
+        <textarea class="q-input" rows="2"
+          placeholder="Ex : Le prospect utilise Okta + Azure AD, comment Primo gère-t-il le provisioning automatique dans ce contexte ?"
+          oninput="autoResize(this);tick()"></textarea>
+        <button class="q-del" onclick="delQ(this)" title="Supprimer"><i class="ti ti-x"></i></button>
+      </div>
+      <div class="q-item">
+        <span class="q-num">2.</span>
+        <textarea class="q-input" rows="2"
+          placeholder="Ex : Ils ont des contraintes RGPD fortes — les données restent-elles en Europe ? Hébergement ?"
+          oninput="autoResize(this);tick()"></textarea>
+        <button class="q-del" onclick="delQ(this)" title="Supprimer"><i class="ti ti-x"></i></button>
+      </div>
+      <div class="q-item">
+        <span class="q-num">3.</span>
+        <textarea class="q-input" rows="2"
+          placeholder="Ex : Ils ont 40% de PC Windows gérés par GPO aujourd'hui — migration possible sans rupture ?"
+          oninput="autoResize(this);tick()"></textarea>
+        <button class="q-del" onclick="delQ(this)" title="Supprimer"><i class="ti ti-x"></i></button>
+      </div>
+    </div>
+    <button class="add-btn" onclick="addQ()"><i class="ti ti-plus"></i>Ajouter un point bloquant</button>
+  </div>
+
+  <!-- ⑥ Contexte libre -->
+  <div class="card">
+    <div class="card-label"><i class="ti ti-notes"></i>Contexte & notes libres</div>
+    <div class="block" style="margin-bottom:0">
+      <div class="block-title"><i class="ti ti-message-dots"></i>Tout ce qui peut aider le SE à préparer le call</div>
+      <textarea class="text-area" id="f-notes" rows="4"
+        placeholder="Dynamique d'équipe, sensibilités particulières, anecdotes du discovery call, ton impression générale sur la maturité du prospect, ce qui l'a le plus intéressé dans ton pitch initial..."
+        oninput="autoResize(this)"></textarea>
+    </div>
+  </div>
+
+</main>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="footer-hint">
+    <i class="ti ti-clock-hour-3"></i>
+    À envoyer au SE minimum 24h avant le call
+  </div>
+  <div class="footer-actions">
+    <button class="btn btn-ghost" onclick="resetForm()"><i class="ti ti-refresh"></i>Réinitialiser</button>
+    <button class="btn btn-primary" onclick="generateBrief()"><i class="ti ti-send"></i>Générer & copier le brief</button>
+  </div>
+</footer>
+
+<!-- Modal de sortie -->
+<div class="modal-overlay" id="modal-overlay" onclick="closeModal(event)">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title"><i class="ti ti-clipboard-text"></i>Brief généré — prêt à copier</div>
+      <button class="modal-close" onclick="closeModalDirect()"><i class="ti ti-x"></i></button>
+    </div>
+    <div class="modal-body">
+      <pre class="modal-output" id="modal-output"></pre>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-ghost" onclick="closeModalDirect()"><i class="ti ti-x"></i>Fermer</button>
+      <button class="btn btn-primary" onclick="copyOutput()"><i class="ti ti-copy"></i>Copier dans le presse-papier</button>
+    </div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<script>
+/* ── Pill toggle ── */
+function togglePill(el) {
+  el.classList.toggle('active');
+  tick();
+}
+
+/* ── Urgency single select ── */
+function selectUrg(el, cls) {
+  document.querySelectorAll('#urgency-row .urg').forEach(u => u.classList.remove('active'));
+  el.classList.add('active');
+  tick();
+}
+
+/* ── Auto-resize textareas ── */
+function autoResize(el) {
+  el.style.height = 'auto';
+  el.style.height = el.scrollHeight + 'px';
+}
+document.querySelectorAll('textarea').forEach(autoResize);
+
+/* ── Progress tracker ── */
+const REQUIRED_IDS = ['f-company','f-contact','f-size','f-devices','f-date','f-ae','f-problem'];
+
+function tick() {
+  let filled = 0;
+  const total = REQUIRED_IDS.length + 2; // +urgency +question
+
+  REQUIRED_IDS.forEach(id => {
+    const el = document.getElementById(id);
+    if (el && el.value.trim().length > 0) filled++;
+  });
+
+  if (document.querySelector('#urgency-row .urg.active')) filled++;
+  if (Array.from(document.querySelectorAll('#q-list .q-input')).some(t => t.value.trim().length > 0)) filled++;
+
+  const pct = Math.round((filled / total) * 100);
+  document.getElementById('progress-fill').style.width = pct + '%';
+  document.getElementById('pct-label').textContent = pct + '% complété';
+}
+
+/* ── Questions ── */
+let qCount = 3;
+function addQ() {
+  qCount++;
+  const list = document.getElementById('q-list');
+  const item = document.createElement('div');
+  item.className = 'q-item';
+  item.innerHTML = `
+    <span class="q-num">${qCount}.</span>
+    <textarea class="q-input" rows="2" placeholder="Ajouter un point bloquant..." oninput="autoResize(this);tick()"></textarea>
+    <button class="q-del" onclick="delQ(this)" title="Supprimer"><i class="ti ti-x"></i></button>`;
+  list.appendChild(item);
+  item.querySelector('textarea').focus();
+  renumberQ();
+}
+
+function delQ(btn) {
+  const items = document.querySelectorAll('#q-list .q-item');
+  if (items.length <= 1) { showToast('Il faut au moins une question bloquante.', 'error'); return; }
+  btn.closest('.q-item').remove();
+  renumberQ();
+  tick();
+}
+
+function renumberQ() {
+  document.querySelectorAll('#q-list .q-num').forEach((el, i) => el.textContent = (i+1) + '.');
+  qCount = document.querySelectorAll('#q-list .q-item').length;
+}
+
+/* ── Helpers ── */
+function getPills(groupId) {
+  return Array.from(document.querySelectorAll(`#${groupId} .pill.active`))
+    .map(p => p.textContent.trim()).join(', ') || '—';
+}
+
+function val(id) {
+  const el = document.getElementById(id);
+  return el ? el.value.trim() || '—' : '—';
+}
+
+/* ── Generate brief ── */
+function generateBrief() {
+  const company = document.getElementById('f-company').value.trim();
+  const problem = document.getElementById('f-problem').value.trim();
+  const questions = Array.from(document.querySelectorAll('#q-list .q-input'))
+    .map(t => t.value.trim()).filter(v => v);
+
+  if (!company) { showToast('Nom de l'entreprise requis.', 'error'); return; }
+  if (!problem) { showToast('Problème principal requis.', 'error'); return; }
+  if (questions.length === 0) { showToast('Au moins une question bloquante requise.', 'error'); return; }
+
+  const urgEl = document.querySelector('#urgency-row .urg.active');
+  const urgency = urgEl ? urgEl.textContent.trim() : '—';
+
+  const brief = `📋 BRIEF AVANT-VENTE — DEMANDE SE
+═══════════════════════════════════════════════════════
+
+🏢 INFORMATIONS PROSPECT
+  Entreprise         : ${company}
+  Interlocuteur(s)   : ${val('f-contact')}
+  Email              : ${val('f-email')}
+  Taille             : ${val('f-size')}
+  Secteur            : ${val('f-sector')}
+  Parc d'appareils   : ${val('f-devices')}
+  OS ciblés          : ${getPills('os-pills')}
+
+📅 CALL
+  Date               : ${val('f-date')}
+  AE responsable     : ${val('f-ae')}
+
+───────────────────────────────────────────────────────
+⚙️  STACK TECHNIQUE ACTUELLE
+  MDM actuel         : ${getPills('mdm-pills')}
+  SIRH               : ${getPills('sirh-pills')}
+  SSO / IAM          : ${getPills('sso-pills')}
+  Suite bureautique  : ${getPills('suite-pills')}
+  Ticketing IT       : ${val('f-ticketing')}
+
+───────────────────────────────────────────────────────
+🎯 CONTEXTE & ENJEU
+  Problème principal :
+  ${problem.split('\n').join('\n  ')}
+
+  Urgence            : ${urgency}
+
+  Use cases démo     : ${getPills('usecase-pills')}
+
+───────────────────────────────────────────────────────
+👥 PROCESSUS DÉCISIONNEL
+  Décideur final     : ${val('f-decision-maker')}
+  Champion interne   : ${val('f-champion')}
+  Potentiel bloqueur : ${val('f-blocker')}
+  Budget évoqué      : ${val('f-budget')}
+  Timeline décision  : ${val('f-timeline')}
+  Priorité deal      : ${val('f-priority') === '—' ? '—' : document.getElementById('f-priority').options[document.getElementById('f-priority').selectedIndex].text}
+  Autres solutions   : ${val('f-competitors-eval')}
+
+───────────────────────────────────────────────────────
+❓ POINTS BLOQUANTS — POURQUOI TU AS BESOIN DU SE
+${questions.map((q, i) => `  ${i+1}. ${q}`).join('\n')}
+
+───────────────────────────────────────────────────────
+📝 NOTES LIBRES
+  ${val('f-notes').split('\n').join('\n  ')}
+
+═══════════════════════════════════════════════════════
+⏰ À envoyer au SE minimum 24h avant le call.`;
+
+  document.getElementById('modal-output').textContent = brief;
+  document.getElementById('modal-overlay').classList.add('open');
+}
+
+/* ── Copy to clipboard ── */
+function copyOutput() {
+  const text = document.getElementById('modal-output').textContent;
+  navigator.clipboard.writeText(text)
+    .then(() => showToast('Brief copié dans le presse-papier !', 'success'))
+    .catch(() => {
+      const ta = document.createElement('textarea');
+      ta.value = text; document.body.appendChild(ta);
+      ta.select(); document.execCommand('copy');
+      document.body.removeChild(ta);
+      showToast('Brief copié !', 'success');
+    });
+}
+
+/* ── Modal ── */
+function closeModal(e) {
+  if (e.target === document.getElementById('modal-overlay')) closeModalDirect();
+}
+function closeModalDirect() {
+  document.getElementById('modal-overlay').classList.remove('open');
+}
+
+/* ── Reset ── */
+function resetForm() {
+  if (!confirm('Réinitialiser tous les champs ?')) return;
+  document.querySelectorAll('input, select, textarea').forEach(el => {
+    if (el.type === 'checkbox' || el.type === 'radio') el.checked = false;
+    else el.value = '';
+  });
+  document.querySelectorAll('.pill.active').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.urg.active').forEach(u => u.classList.remove('active'));
+
+  const list = document.getElementById('q-list');
+  list.innerHTML = `
+    <div class="q-item">
+      <span class="q-num">1.</span>
+      <textarea class="q-input" rows="2" placeholder="Ex : Le prospect utilise Okta + Azure AD, comment Primo gère-t-il le provisioning automatique dans ce contexte ?" oninput="autoResize(this);tick()"></textarea>
+      <button class="q-del" onclick="delQ(this)" title="Supprimer"><i class="ti ti-x"></i></button>
+    </div>`;
+  qCount = 1;
+  tick();
+}
+
+/* ── Toast ── */
+let toastTimer;
+function showToast(msg, type = '') {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = 'toast' + (type ? ' ' + type : '');
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove('show'), 3200);
+}
+
+/* ── Keyboard shortcut Cmd/Ctrl+Enter to generate ── */
+document.addEventListener('keydown', e => {
+  if ((e.metaKey || e.ctrlKey) && e.key === 'Enter') generateBrief();
+  if (e.key === 'Escape') closeModalDirect();
+});
+</script>
+</body>
+</html>
